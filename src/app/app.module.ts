@@ -1,17 +1,18 @@
-// System Modules
-import { BrowserModule } from '@angular/platform-browser';
+// Core Modules
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
 
 // Extended Modules
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
 // Application Modules
-import { AppComponent } from './app.component';
+import { HomeModule } from './modules/home/home.module';
+import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClient } from './core/http-client';
+// Application Components
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,13 @@ import { HttpClient } from './core/http-client';
     FormsModule,
     HttpModule,
 
-    Angular2FontawesomeModule
+    Angular2FontawesomeModule,
+
+    /* Define application modules before AppRoutingModule  */
+    HomeModule,
+    AppRoutingModule
   ],
-  providers: [ HttpClient ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

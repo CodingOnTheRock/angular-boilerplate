@@ -1,30 +1,19 @@
+// Core Modules
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
-import { environment } from './../../environments/environment';
+// Services
+import { LocalStorageUtils } from './../browser/local-storage-utils';
 
 @Injectable()
 export class HttpClient {
-    constructor(private http: Http) {}
-
-    getToken() {
-        const token = localStorage.getItem(environment.security.token_key);
-        if (token) {
-            return token;
-        }
-
-        return null;
-    }
-
-    setToken(token) {
-        localStorage.setItem(environment.security.token_key, token);
-    }
+    constructor(private http: Http, private localStorageUtils: LocalStorageUtils) {}
 
     createAuthorizationHeader() {
         const headers = new Headers();
 
         // Set token
-        const token = this.getToken();
+        const token = this.localStorageUtils.getToken();
         if (token) {
             headers.append('Authorization', token);
         }
